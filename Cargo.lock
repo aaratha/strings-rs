@@ -681,6 +681,7 @@ version = "0.1.0"
 dependencies = [
  "cpal",
  "macroquad",
+ "wasm-bindgen",
 ]
 
 [[package]]
