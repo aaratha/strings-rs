@@ -4,7 +4,13 @@ use std::f32::consts::TAU;
 use std::sync::{Arc, Mutex};
 
 const STRING_COUNT: usize = 5;
-const GRAB_DISTANCE: f32 = 20.0;
+const STRING_GRAB_DISTANCE: f32 = 20.0;
+const STRING_ELASTICITY: f32 = 0.4;
+const STRING_GAP: f32 = 60.0;
+const STRING_LENGTH: f32 = 300.0;
+const STRING_POINT_COUNT: usize = 20;
+const STRING_THICKNESS: f32 = 2.0;
+const PHYSICS_MULTIPLIER: f32 = 160.0;
 
 // String object for our visual simulation.
 struct String {
@@ -59,7 +65,7 @@ impl String {
         for i in 1..self.points.len() - 1 {
             let temp = self.points[i];
             let velocity = self.points[i] - self.prev_points[i];
-            self.points[i] += velocity * dt * 130.0; // Gravity factor
+            self.points[i] += velocity * dt * PHYSICS_MULTIPLIER; // Gravity factor
             self.prev_points[i] = temp;
         }
 
@@ -89,7 +95,7 @@ impl String {
         if is_mouse_button_down(MouseButton::Left) {
             let mouse_pos = vec2(mouse_position().0, mouse_position().1);
             for i in 1..self.points.len() - 1 {
-                if (mouse_pos - self.points[i]).length() < GRAB_DISTANCE {
+                if (mouse_pos - self.points[i]).length() < STRING_GRAB_DISTANCE {
                     self.points[i] = mouse_pos;
                 }
             }
@@ -218,18 +224,16 @@ async fn main() {
     // Visuals setup with macroquad.
     let center = vec2(screen_width() / 2.0, screen_height() / 2.0);
     let mut strings: Vec<String> = Vec::new();
-    let gap: f32 = 60.0;
-    let length: f32 = 300.0;
 
     // Create a few strings.
     for i in 0..STRING_COUNT {
-        let x_pos: f32 = (i as f32 - 2.0) * gap;
+        let x_pos: f32 = (i as f32 - 2.0) * STRING_GAP;
         strings.push(String::new(
-            center + vec2(x_pos, length / 2.0),
-            center + vec2(x_pos, -length / 2.0),
-            20,
-            0.3,
-            2.0,
+            center + vec2(x_pos, STRING_LENGTH / 2.0),
+            center + vec2(x_pos, -STRING_LENGTH / 2.0),
+            STRING_POINT_COUNT,
+            STRING_ELASTICITY,
+            STRING_THICKNESS,
             GRAY,
         ));
     }
