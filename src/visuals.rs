@@ -1,10 +1,10 @@
 // visuals.rs
 
+use crate::clock::Clock;
+use crate::constants::*;
+use crate::string::String;
 use macroquad::prelude::*;
 use std::sync::{Arc, Mutex};
-use crate::string::String;
-use crate::constants::*;
-use crate::clock::Clock;
 
 pub struct VisualsState {
     pub strings: Vec<String>,
@@ -28,6 +28,7 @@ pub fn init_visuals() -> VisualsState {
             STRING_POINT_COUNT,
             STRING_ELASTICITY,
             STRING_THICKNESS,
+            STRING_FREQUENCIES[i],
             GRAY,
         ));
     }
