@@ -1,7 +1,5 @@
 // karplus_strong.rs
 
-use rand::Rng;
-
 pub struct KarplusStrong {
     buffer: Vec<f32>,
     read_index: usize,
@@ -24,9 +22,8 @@ impl KarplusStrong {
 
     /// Pluck the string by filling the buffer with random noise.
     pub fn pluck(&mut self) {
-        let mut rng = rand::thread_rng();
         for sample in self.buffer.iter_mut() {
-            *sample = rng.gen_range(-1.0..1.0);
+            *sample = macroquad::rand::gen_range(-1.0, 1.0);
         }
         self.initialized = true;
     }

@@ -41,7 +41,9 @@ pub async fn update_visuals(state: &mut VisualsState) {
     let (mouse_x, mouse_y) = mouse_position();
 
     // Draw simple visuals.
-    draw_circle(mouse_x, mouse_y, 20.0, GREEN);
+    let b = 0.2;
+    let gray = Color::new(b, b, b, 0.3);
+    draw_circle(mouse_x, mouse_y, 20.0, gray);
     draw_text(&format!("FPS: {}", get_fps()), 10.0, 20.0, 20.0, BLACK);
 
     // Update the clock (for visuals).
