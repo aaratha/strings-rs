@@ -1,0 +1,6 @@
+#+title: strings-rs (WIP)
+
+2D music game about strings built using Karplus-Strong physical modelling and Verlet integration for sound and graphics
+
+Core technologies:
++ Rust, CPAL (sound), Macroquad (graphics)
