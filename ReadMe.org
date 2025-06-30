@@ -3,4 +3,4 @@
 2D music game about strings built using Karplus-Strong physical modeling and Verlet integration for sound and graphics respectively.
 
 Core technologies:
-+ Rust, CPAL (sound), Macroquad (graphics)
++ Rust, CPAL (sound), Macroquad (graphics), WASM+HTML (for web builds)
